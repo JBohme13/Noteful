@@ -1,0 +1,15 @@
+.folders-main {
+    height: 80px;
+    text-align: center;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-button {
+    height: 10px;
+    width: 24 px;
+    margin: 5px;
+}

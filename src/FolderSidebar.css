@@ -1,0 +1,18 @@
+#selected {
+    background-color: rgb(52, 78, 221);
+}
+
+.folder {
+    height: 80px;
+    text-align: center;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.folder-link {
+    margin-top: auto;
+    margin-bottom: auto;
+}
