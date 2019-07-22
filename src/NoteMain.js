@@ -1,10 +1,18 @@
 import React, { Component } from 'react'
+import NotefulContext from './NotefulContext'
 import './NoteMain.css'
 
 export default class NoteMain extends Component {
+  static defaultProps = {
+    match: {
+      params: {}
+    }
+  }
+  static contextType = NotefulContext;
   render() {
-      const notes = this.props.notes
-      const noteId = this.props.noteId
+      const value = this.context;
+      const noteId = value.noteId;
+      const notes = value.notes;
       const selectedNote = notes.map((note, i) => 
         note.id === noteId ?
         <div key={i}>
