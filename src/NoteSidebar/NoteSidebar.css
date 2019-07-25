@@ -1,0 +1,32 @@
+.folder {
+    height: 80px;
+    text-align: center;
+    margin-top: 2.5px;
+    margin-bottom: 2.5px;
+    border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+}
+
+.folder-link {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#selected {
+    background-color: rgb(52, 78, 221);
+}
+
+#back-button {
+    height: 22px;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    box-shadow: 1px 1px;
+    font-size: 14px;
+    color: darkslategrey;
+}
+
+#back-button:active {
+    box-shadow: -1px -1px;
+}
