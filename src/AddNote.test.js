@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AddNote from './AddNote';
 import renderer from 'react-test-renderer'
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json';
 
 describe('AddNote component', () => {
   it('renders without crashing', () => {
@@ -16,4 +18,9 @@ describe('AddNote component', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();  
   });
+
+  /*it('adds a new note', () => {
+    const wrapper = shallow(<AddNote/>)
+    expect(toJson(wrapper)).toMatchSnapshot()
+  })*/
 });
