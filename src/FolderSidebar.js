@@ -16,7 +16,6 @@ export default class folderSidebar extends Component {
         const folderId = this.props.match.folderId;
         const folders = value.folders.map((folder, i) => 
             folder.id === folderId ?
-            <FolderError>
               <div key={i} className='folder' id='selected'>
                 <Link 
                   className='folder-link' 
@@ -25,9 +24,7 @@ export default class folderSidebar extends Component {
                 >
                   {folder.name}
                 </Link>
-              </div> 
-            </FolderError> :
-            <FolderError>
+              </div> :
               <div key={i} className='folder'>
                 <Link 
                   className='folder-link' 
@@ -37,11 +34,12 @@ export default class folderSidebar extends Component {
                   {folder.name}
                 </Link>
               </div>
-            </FolderError>
         )
         return(
             <section className='sidebar-container'>
+                <FolderError>
                 { folders }
+                </FolderError>
                 <button 
                   id='add-folder'
                   onClick={() => value.history.push('/add-folder')}

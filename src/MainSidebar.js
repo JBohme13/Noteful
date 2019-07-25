@@ -9,7 +9,6 @@ export default class MainSidebar extends Component {
     render() {
         const value = this.context;
         const folders = value.folders.map((folder, i) => 
-          <FolderError>
             <div key={i} id='folder'>
                 <Link 
                   id='folder-link' 
@@ -19,11 +18,12 @@ export default class MainSidebar extends Component {
                   {folder.name}
                 </Link>
             </div>
-          </FolderError>
         )
         return(
             <section className='sidebar-container'>
+                <FolderError>
                 { folders }
+                </FolderError>
                 <button 
                   id='add-folder'
                   onClick={() => value.history.push('/add-folder')}>

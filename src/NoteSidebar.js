@@ -12,13 +12,12 @@ export default class NoteSidebar extends Component {
       }
     static contextType = NotefulContext;
     render() {
-        const value= this.context;
+        const value = this.context;
+        const notes = value.notes;
         const folders = value.folders;
-        const folderId = value.folderId;
         const selectedFolder = folders.map((folder, i) =>
-        folder.id === folderId ? 
-            <FolderError>
-              <div key={i} className='folder' id='selected'>
+        folder.id === notes.folderId ? 
+              <div key={i} className='folder'>
                 <Link 
                   className='folder-link' 
                   to={`/folders/${folder.id}`}
@@ -26,13 +25,12 @@ export default class NoteSidebar extends Component {
                 >
                   {folder.name}
                 </Link>
-              </div>
-            </FolderError> : '')
+              </div> : '')
         return(
             <div className='sidebar-container'>
-              <div>
+              <FolderError>
                 { selectedFolder }
-              </div>
+              </FolderError>
               <button 
                 id='back-button'
                 onClick={() => value.history.push('/')}
