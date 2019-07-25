@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainMain component renders the UI as expected 1`] = `
+<div
+  className="main-container"
+>
+  <button
+    id="add-note-container"
+    onClick={[Function]}
+  >
+    <a
+      href="/add-note"
+      id="add-note"
+    >
+      Add Note
+    </a>
+  </button>
+</div>
+`;

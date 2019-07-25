@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddNote component renders the UI as expected 1`] = `
+<form
+  id="form-container"
+>
+  <h2>
+    Add new note
+  </h2>
+  <div
+    id="form-group"
+  >
+    <label
+      htmlFor="note-name"
+    >
+      Note name
+    </label>
+    <br />
+    <input
+      id="note-name"
+      name="note-name"
+      required="required"
+      type="text"
+    />
+    <br />
+    <label
+      htmlFor="select-folder"
+    >
+      Select a folder
+    </label>
+    <br />
+    <select
+      id="select-folder"
+      name="select-folder"
+      required="required"
+      type="radio"
+    />
+    <br />
+    <label
+      htmlFor="note-body"
+    >
+      Type note here
+    </label>
+    <br />
+    <textarea
+      id="note-body"
+    />
+    <br />
+    <button
+      id="note-submit"
+      onClick={[Function]}
+      type="submit"
+    >
+      Submit
+    </button>
+    <button
+      id="note-clear"
+      onClick={[Function]}
+    >
+      Clear
+    </button>
+  </div>
+</form>
+`;

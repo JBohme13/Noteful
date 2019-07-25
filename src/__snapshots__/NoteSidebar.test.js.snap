@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoteSidebar component renders the UI as expected 1`] = `
+<div
+  className="sidebar-container"
+>
+  <div />
+  <button
+    id="back-button"
+    onClick={[Function]}
+  >
+    Go Back
+  </button>
+</div>
+`;

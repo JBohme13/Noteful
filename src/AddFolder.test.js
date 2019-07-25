@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AddFolder from './AddFolder';
 import renderer from 'react-test-renderer'
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 
 describe('AddFolder component', () => {
   it('renders without crashing', () => {
@@ -16,4 +18,9 @@ describe('AddFolder component', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();  
   });
+
+  it('adds new folder and routes to home page', () => {
+    const wrapper = shallow(<AddFolder />)
+    expect(toJson(wrapper)).toMatchSnapshot()
+  })
 });

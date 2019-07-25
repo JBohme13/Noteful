@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
-import NoteError from './NoteError'
+import NoteError from './noteError'
 import DeleteError from './DeleteError'
 import './MainMain.css'
 

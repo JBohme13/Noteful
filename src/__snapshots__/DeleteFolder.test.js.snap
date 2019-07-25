@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeleteFolder component renders the UI as expected 1`] = `
+<div
+  id="delete-folder-container"
+>
+  <h2>
+    Delete folder
+  </h2>
+  <form
+    id="delete-folder-form"
+  >
+    <label
+      htmlFor="select-folder-for-delete"
+    >
+      Select folder
+    </label>
+    <select
+      id="select-folder-for-delete"
+      name="select-folder-for-delete"
+      required="required"
+      type="radio"
+    />
+    <button
+      id="delete-button"
+      onClick={[Function]}
+      type="submit"
+    >
+      Delete
+    </button>
+  </form>
+  <button
+    id="clear-button"
+    onClick={[Function]}
+  >
+    Clear
+  </button>
+</div>
+`;

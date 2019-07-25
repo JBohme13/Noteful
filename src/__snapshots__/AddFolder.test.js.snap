@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddFolder component adds new folder and routes to home page 1`] = `
+<div
+  id="add-folder-container"
+>
+  <form
+    id="form-container"
+  >
+    <h2>
+      Add new folder
+    </h2>
+    <div
+      id="form-group"
+    >
+      <label
+        htmlFor="folder-name"
+      >
+        Folder Name
+      </label>
+      <br />
+      <input
+        id="folder-name"
+        name="folder-name"
+        required="required"
+        type="text"
+      />
+      <br />
+      <button
+        id="folder-submit"
+        onClick={[Function]}
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+  <button
+    id="folder-clear"
+    onClick={[Function]}
+  >
+    Clear
+  </button>
+</div>
+`;
+
+exports[`AddFolder component renders the UI as expected 1`] = `
+<div
+  id="add-folder-container"
+>
+  <form
+    id="form-container"
+  >
+    <h2>
+      Add new folder
+    </h2>
+    <div
+      id="form-group"
+    >
+      <label
+        htmlFor="folder-name"
+      >
+        Folder Name
+      </label>
+      <br />
+      <input
+        id="folder-name"
+        name="folder-name"
+        required="required"
+        type="text"
+      />
+      <br />
+      <button
+        id="folder-submit"
+        onClick={[Function]}
+        type="submit"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+  <button
+    id="folder-clear"
+    onClick={[Function]}
+  >
+    Clear
+  </button>
+</div>
+`;

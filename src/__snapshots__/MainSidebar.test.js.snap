@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainSidebar component renders the UI as expected 1`] = `
+<section
+  className="sidebar-container"
+>
+  <button
+    id="add-folder"
+    onClick={[Function]}
+  >
+    Add Folder
+  </button>
+  <button
+    id="delete-folder"
+    onClick={[Function]}
+  >
+    Delete Folder
+  </button>
+</section>
+`;

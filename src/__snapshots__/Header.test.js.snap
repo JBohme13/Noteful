@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component renders the UI as expected 1`] = `
+<div
+  className="header-container"
+>
+  <a
+    className="header"
+    href="/"
+  >
+    Noteful
+  </a>
+</div>
+`;
