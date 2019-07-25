@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {Link} from 'react-router-dom'
 import NotefulContext from './NotefulContext'
 import NoteError from './NoteError'
 import DeleteError from './DeleteError'
@@ -12,13 +11,13 @@ export default class MainMain extends Component{
         const notes = value.notes.map((note, i) => 
             <NoteError>
               <section id='notes-main' key={i}>
-                <Link 
-                  to={`/notes/${note.id}`} 
+                <a 
+                  href={`/notes/${note.id}`} 
                   id='note-link'
                   onClick={() => value.setNoteId(note.id)}
                 >
                   {note.name}
-                </Link>
+                </a>
                 <span id='note-modified'>{new Date(note.modified).toLocaleString()}</span>
                 <DeleteError>
                   <button 
@@ -37,12 +36,12 @@ export default class MainMain extends Component{
               <button 
                 id='add-note-container'
                 onClick ={() => value.history.push('/add-note')}>
-                <Link 
-                  to={'/add-note'}
+                <a 
+                  href={'/add-note'}
                   id='add-note'
                 >
                   Add Note
-                </Link>
+                </a>
               </button>
             </div>
         )
