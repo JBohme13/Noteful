@@ -7,7 +7,7 @@ export default class Sidebar extends Component {
     render() {
         const value = this.context;
         return(
-            <div className='main-container'>
+            <div className='sidebar-container'>
                 {
                     value.routes.map((route, i) => {
                       return(

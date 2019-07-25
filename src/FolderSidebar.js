@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import NotefulContext from './NotefulContext'
+import FolderError from './FolderError'
 import './FolderSidebar.css'
 
 export default class folderSidebar extends Component {
@@ -15,7 +16,8 @@ export default class folderSidebar extends Component {
         const folderId = this.props.match.folderId;
         const folders = value.folders.map((folder, i) => 
             folder.id === folderId ?
-            <div key={i} className='folder' id='selected'>
+            <FolderError>
+              <div key={i} className='folder' id='selected'>
                 <Link 
                   className='folder-link' 
                   to={`/folders/${folder.id}`}
@@ -23,8 +25,10 @@ export default class folderSidebar extends Component {
                 >
                   {folder.name}
                 </Link>
-            </div> :
-            <div key={i} className='folder'>
+              </div> 
+            </FolderError> :
+            <FolderError>
+              <div key={i} className='folder'>
                 <Link 
                   className='folder-link' 
                   to={`/folders/${folder.id}`}
@@ -32,12 +36,23 @@ export default class folderSidebar extends Component {
                 >
                   {folder.name}
                 </Link>
-            </div>
+              </div>
+            </FolderError>
         )
         return(
             <section className='sidebar-container'>
                 { folders }
-                <button className='addFolder'>Add Folder</button>
+                <button 
+                  id='add-folder'
+                  onClick={() => value.history.push('/add-folder')}
+                >
+                  Add Folder
+                </button>
+                <button 
+                  id='delete-folder'
+                  onClick={() => value.history.push('/delete-folder')}>
+                      Delete Folder
+                </button>
             </section> 
         )
     }

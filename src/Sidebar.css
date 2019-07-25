@@ -1,0 +1,5 @@
+.sidebar-container {
+    flex: 1;
+    order: 2;
+    flex-basis: 30%;
+  }

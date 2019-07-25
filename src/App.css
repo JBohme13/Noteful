@@ -1,4 +1,4 @@
-.route-container {
+.app-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -20,4 +20,11 @@
 .header-container {
   order: 1;
   flex-basis: 100%;
+}
+
+.error-container {
+  order: 4;
+  flex-basis: 100%;
+  margin: 10px;
+  text-align: center;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
+import DeleteError from './DeleteError'
 import './NoteMain.css'
 
 export default class NoteMain extends Component {
@@ -20,7 +21,15 @@ export default class NoteMain extends Component {
             <h2>{note.name}</h2>
             <span>Date modified: {new Date(note.modified).toLocaleString()}</span>
           </section>
-          <p>{note.content}</p>
+          <p className='note-content'>{note.content}</p>
+          <DeleteError>
+            <button 
+              id='delete-button'
+              onClick={e => value.deleteNote(note.id)}
+            >
+              Delete
+            </button>
+          </DeleteError>
         </div> : '');
       return(
           <div className='main-container'>

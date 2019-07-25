@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import NotefulContext from './NotefulContext'
+import FolderError from './FolderError'
 import './MainSidebar.css'
 
 export default class MainSidebar extends Component {
@@ -8,20 +9,31 @@ export default class MainSidebar extends Component {
     render() {
         const value = this.context;
         const folders = value.folders.map((folder, i) => 
-            <div key={i} className='folder'>
+          <FolderError>
+            <div key={i} id='folder'>
                 <Link 
-                  className='folder-link' 
+                  id='folder-link' 
                   to={`/folders/${folder.id}`}
                   onClick={() => value.setFolderId(folder.id)}
                 >
                   {folder.name}
                 </Link>
             </div>
+          </FolderError>
         )
         return(
             <section className='sidebar-container'>
                 { folders }
-                <button className='addFolder'>Add Folder</button>
+                <button 
+                  id='add-folder'
+                  onClick={() => value.history.push('/add-folder')}>
+                      Add Folder
+                </button>
+                <button 
+                  id='delete-folder'
+                  onClick={() => value.history.push('/delete-folder')}>
+                      Delete Folder
+                </button>
             </section>
             
         )

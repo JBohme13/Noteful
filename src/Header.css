@@ -2,7 +2,7 @@
     font-size: 32px;
     margin-left: 30%;
     margin-right: 50%;
-    color: black;
+    color: darkslategrey;
     text-decoration: none;
 }
 
@@ -12,7 +12,7 @@
     width: 100%;
     padding-top: 32px;
     padding-bottom: 32px;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid grey;
 }
 
 .header:hover {

@@ -1,0 +1,56 @@
+#delete-folder-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#select-folder-for-delete {
+    order: 1;
+    flex: 2;
+    height: 30px;
+    font-size: 14px;
+    width: 55%;
+    margin: 5px;
+    color: darkslategrey;
+}
+
+#delete-button {
+    order: 2;
+    height: 22px;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    box-shadow: 1px 1px;
+    font-size: 14px;
+    color: darkslategrey;
+}
+
+#delete-button {
+    box-shadow: -1px -1px;
+}
+
+#clear-button {
+    position: relative;
+    left: 82px;
+    top: -32px;
+    height: 22px;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    box-shadow: 1px 1px;
+    font-size: 14px;
+    color: darkslategrey;
+}
+
+#clear-button {
+    box-shadow: -1px -1px;
+}
+
+label {
+    color: darkslategrey;
+    font-size: 16px;
+}
+
+h2 {
+    color: darkslategrey;
+    font-weight: normal;
+}

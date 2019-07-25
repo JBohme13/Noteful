@@ -7,7 +7,7 @@
     text-align: center;
     margin-top: 2.5px;
     margin-bottom: 2.5px;
-    border: 1px black solid;
+    border: 1px grey solid;
     display: flex;
     flex-direction: column;
 }
@@ -15,4 +15,35 @@
 .folder-link {
     margin-top: auto;
     margin-bottom: auto;
+    text-decoration: none;
+    color: darkslategrey;
+    font-size: 24px;
+}
+
+#add-folder {
+    height: 22px;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    box-shadow: 1px 1px;
+    font-size: 14px;
+    color: darkslategrey;
+}
+
+#add-folder:active {
+    box-shadow: -1px -1px;
+}
+
+#delete-folder {
+    border: 1px solid grey;
+    border-radius: 3px;
+    box-shadow: 1px 1px;
+    margin: 5px;
+    height: 22px;
+    font-size: 14px;
+    color: darkslategrey;
+}
+
+#delete-folder:active {
+    box-shadow: -1px -1px;
 }

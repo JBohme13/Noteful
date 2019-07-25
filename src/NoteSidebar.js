@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
+import FolderError from './FolderError'
 import './NoteSidebar.css'
 
 export default class NoteSidebar extends Component {
@@ -16,7 +17,8 @@ export default class NoteSidebar extends Component {
         const folderId = value.folderId;
         const selectedFolder = folders.map((folder, i) =>
         folder.id === folderId ? 
-            <div key={i} className='folder' id='selected'>
+            <FolderError>
+              <div key={i} className='folder' id='selected'>
                 <Link 
                   className='folder-link' 
                   to={`/folders/${folder.id}`}
@@ -24,15 +26,19 @@ export default class NoteSidebar extends Component {
                 >
                   {folder.name}
                 </Link>
-            </div> : '')
+              </div>
+            </FolderError> : '')
         return(
             <div className='sidebar-container'>
-                <button className='back-button'>
-                    <Link to={'/'}>Go Back</Link>
-                </button>
-                <div>
+              <div>
                 { selectedFolder }
-                </div>
+              </div>
+              <button 
+                id='back-button'
+                onClick={() => value.history.push('/')}
+              >
+                  Go Back
+              </button>
             </div>
         )
     }

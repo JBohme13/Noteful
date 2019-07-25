@@ -8,10 +8,14 @@ import NoteMain from './NoteMain'
 import NoteSidebar from './NoteSidebar'
 import Main from './Main'
 import Sidebar from './Sidebar'
+import AddNote from './AddNote'
+import AddFolder from './AddFolder'
+import DeleteFolder from './DeleteFolder'
 import NotefulContext from './NotefulContext'
+import { withRouter } from 'react-router-dom'
 import './App.css';
 
-export default class App extends Component {
+class App extends Component {
   static contextType = NotefulContext;
 
   constructor(props) {
@@ -21,9 +25,9 @@ export default class App extends Component {
       notes: [],
       noteId: null,
       folderId: null,
+      error: '',
     }
   }
-  //addNote = () => {}
 
   setNoteId = (value) => {
     this.setState({
@@ -36,6 +40,73 @@ export default class App extends Component {
       folderId: value,
     })
   }
+
+  addNote = (event, name, body, folder) => {
+    event.preventDefault();
+    const uuidv4 = require('uuid/v4');
+    const data = {
+      id: uuidv4(),
+      name: name,
+      content: body,
+      folderId: folder,
+      modified: new Date()
+    };
+    fetch('http://localhost:9090/notes/', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    })
+    .then(addResponse => {
+      if(addResponse.ok) {
+        return addResponse.json();
+      } else{
+        throw new Error('Something went wrong, note not added')
+      }
+    })
+    .then(addResponseJson => {
+      let updateNotes = this.state.notes;
+      updateNotes.push(addResponseJson);
+      this.setState({          notes: updateNotes,
+        error: '',
+      })
+      this.props.history.push('/');
+    })
+    .catch(error => this.setState({error: error.message}))
+  }
+
+  addFolder = (event, name) => {
+    event.preventDefault();
+    const uuidv4 = require('uuid/v4');
+    const data = {
+      id: uuidv4(),
+      name: name,
+    };
+    fetch('http://localhost:9090/folders/', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    })
+    .then(addResponse => {
+      if(addResponse.ok) {
+        return addResponse.json();
+      } else {
+        throw new Error('Something went wrong, Folder not added')
+      }
+    })
+    .then(addResponseJson => {
+      let updateFolders = this.state.folders;
+      updateFolders.push(addResponseJson);
+      this.setState({
+        folders: updateFolders,
+      });
+      this.props.history.push('/');
+    })
+    .catch(error => this.setState({error: error.message}))
+  }
   
   deleteNote = (noteId) => {
     fetch(`http://localhost:9090/notes/${noteId}`, {
@@ -43,16 +114,50 @@ export default class App extends Component {
       headers: {
         'content-type': 'application/json'
       }
-      .then(deleteResponse => {
-        if(deleteResponse.ok) {
-          let updatedNotes = this.state.notes.filter(note => note.id !== noteId )
-          this.setState({
-            notes: updatedNotes,
-          })
-        }
-      })
     })
+    .then(deleteResponse => {
+      if(deleteResponse.ok) {
+        let updatedNotes = this.state.notes.filter(note => note.id !== noteId )
+        this.setState({
+          notes: updatedNotes,
+          error: '',
+        })
+        this.props.history.push('/');
+      }else {
+        throw new Error('Something went wrong, note was not deleted')
+      }
+    })
+    .catch(error => this.setState({error: error.message}))
   }
+
+  deleteFolder = (event, folderId) => {
+    event.preventDefault();
+    fetch(`http://localhost:9090/folders/${folderId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      }
+    })
+    .then(deleteResponse => {
+      if(deleteResponse.ok) {
+        let updatedFolders = this.state.folders.filter(folder => folder.id !== folderId)
+        this.setState({
+          folders: updatedFolders,
+          error: '',
+        });
+        this.props.history.push('/');
+      } else {
+        throw new Error('Something went wrong, folder was not deleted')
+      }
+    })
+    .catch(error => this.setState({error: error.message}))
+  } 
+
+  handleClearButton = (event) => {
+    event.preventDefault();
+    this.props.history.push('/')
+  }
+
   componentDidMount() {
     Promise.all([
       fetch('http://localhost:9090/folders'),
@@ -98,6 +203,21 @@ export default class App extends Component {
         main: NoteMain,
         sidebar: NoteSidebar,
       },
+      {
+        path: '/add-note',
+        exact: false,
+        main: AddNote
+      },
+      {
+        path: '/add-folder',
+        exact: false,
+        main: AddFolder
+      },
+      {
+        path: '/delete-folder',
+        exact: false,
+        main: DeleteFolder
+      }
     ];
     
     const contextValue = {
@@ -109,6 +229,11 @@ export default class App extends Component {
       folderId: this.state.folderId,
       setNoteId: this.setNoteId,
       setFolderId: this.setFolderId,
+      addNote: this.addNote,
+      addFolder: this.addFolder,
+      deleteFolder: this.deleteFolder,
+      handleClearButton: this.handleClearButton,
+      history: this.props.history,
     }
     return(
       <NotefulContext.Provider
@@ -117,8 +242,16 @@ export default class App extends Component {
           <Header />
           <Main />
           <Sidebar />
+          <div className='error-container'>
+            {this.state.error}
+          </div>
+          <div className='sucess-container'>
+            {this.state.sucess}
+          </div>
         </div>
       </NotefulContext.Provider>
     )
   }
 }
+
+export default withRouter(App)
