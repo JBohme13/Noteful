@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import MainMain from './MainMain';
+import { shallow } from 'enzyme'
+import toJson from 'enzyme-to-json'
 import renderer from 'react-test-renderer'
 
 describe('MainMain component', () => {
@@ -16,4 +18,10 @@ describe('MainMain component', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();  
   });
+
+  /*it('navigates to the add Note page when clicked', () => {
+    const wrapper = shallow(<MainMain />)
+    wrapper.find('add-note-container').simulate('click')
+    expect(toJson(wrapper)).toMatchSNapShot()
+  })*/
 });

@@ -22,14 +22,12 @@ export default class NoteMain extends Component {
             <span>Date modified: {new Date(note.modified).toLocaleString()}</span>
           </section>
           <p className='note-content'>{note.content}</p>
-          <DeleteError>
-            <button 
-              id='delete-button'
-              onClick={e => value.deleteNote(note.id)}
-            >
-              Delete
-            </button>
-          </DeleteError>
+          <button 
+            id='delete-button'
+            onClick={e => value.deleteNote(note.id)}
+          >
+            Delete
+          </button>
         </div> : '');
       return(
           <div className='main-container'>

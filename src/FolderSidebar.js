@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import NotefulContext from './NotefulContext'
 import FolderError from './FolderError'
+import DeleteError from './DeleteError'
 import './FolderSidebar.css'
 
 export default class folderSidebar extends Component {
@@ -46,11 +47,13 @@ export default class folderSidebar extends Component {
                 >
                   Add Folder
                 </button>
-                <button 
-                  id='delete-folder'
-                  onClick={() => value.history.push('/delete-folder')}>
+                <DeleteError>
+                  <button 
+                    id='delete-folder'
+                    onClick={() => value.history.push('/delete-folder')}>
                       Delete Folder
-                </button>
+                  </button>
+                </DeleteError>
             </section> 
         )
     }
