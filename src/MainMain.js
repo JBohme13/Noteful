@@ -13,7 +13,10 @@ export default class MainMain extends Component{
                 <Link 
                   to={`/notes/${note.id}`} 
                   id='note-link'
-                  onClick={() => value.setNoteId(note.id)}
+                  onClick={() => {
+                    value.setNoteId(note.id);
+                    value.setFolderId(note.folderId);
+                  }}
                 >
                   {note.name}
                 </Link>
@@ -27,7 +30,7 @@ export default class MainMain extends Component{
               </section>
         )
         return(
-            <div className='main-container'>
+            <section className='main-container'>
               <NoteError>
                 { notes }
               </NoteError>
@@ -41,7 +44,7 @@ export default class MainMain extends Component{
                   Add Note
                 </a>
               </button>
-            </div>
+            </section>
         )
     }
 }

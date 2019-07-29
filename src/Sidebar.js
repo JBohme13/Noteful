@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import {Route} from 'react-router-dom'
 import NotefulContext from './NotefulContext'
+import './Sidebar.css'
 
 export default class Sidebar extends Component {
     static contextType = NotefulContext;

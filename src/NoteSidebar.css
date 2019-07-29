@@ -1,4 +1,4 @@
-.folder {
+.note-folder {
     height: 80px;
     text-align: center;
     margin-top: 2.5px;
@@ -6,15 +6,12 @@
     border: 1px black solid;
     display: flex;
     flex-direction: column;
+    background-color: rgba(154, 162, 207, 0.432);
 }
 
 .folder-link {
     margin-top: auto;
     margin-bottom: auto;
-}
-
-#selected {
-    background-color: rgb(52, 78, 221);
 }
 
 #back-button {

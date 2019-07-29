@@ -10,13 +10,14 @@ export default class AddNote extends Component {
         return(
           <form id='form-container'>
               <h2>Add new note</h2>
-              <div id='form-group'>
+              <section id='form-group'>
                   <label htmlFor='note-name'>Note name</label><br/>
                   <input 
                     type='text'
                     name='note-name'
                     id='note-name'
                     required='required'
+                    aria-required='true'
                   />
                   <br/>
                   <label htmlFor='select-folder'>Select a folder</label><br/>
@@ -25,6 +26,7 @@ export default class AddNote extends Component {
                     name='select-folder'
                     id='select-folder'
                     required='required'
+                    aria-required='true'
                   >
                       {
                           value.folders.map((folder, i) => {
@@ -39,8 +41,8 @@ export default class AddNote extends Component {
                           })
                       }
                   </select><br/>
-                  <label htmlFor='note-body'>Type note here</label><br/>
-                  <textarea id='note-body'></textarea>
+                  <label htmlFor='type-note-here'>Type note here</label><br/>
+                  <textarea id='type-note-here'></textarea>
                   <br/>
                   <button 
                     id='note-submit'
@@ -55,7 +57,7 @@ export default class AddNote extends Component {
                   <button 
                     id='note-clear'
                     onClick={event => value.handleClearButton(event)}>Clear</button>
-              </div>
+              </section>
           </form>
         )
     }

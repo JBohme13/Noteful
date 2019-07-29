@@ -8,16 +8,17 @@ export default class AddFolder extends Component {
     render() {
       const value = this.context;
       return(
-          <div id='add-folder-container'>
+          <section id='add-folder-container'>
             <form id='form-container'>
                 <h2>Add new folder</h2>
-                <div id='form-group'>
+                <section id='form-group'>
                   <label htmlFor='folder-name'>Folder Name</label><br/>
                   <input 
                     type='text'
                     name='folder-name'
                     id='folder-name'
                     required='required'
+                    aria-required='true'
                   />
                   <br/>
                   <button 
@@ -27,7 +28,7 @@ export default class AddFolder extends Component {
                   >
                       Submit
                   </button>
-                </div>
+                </section>
             </form>
             <button 
                 id='folder-clear'
@@ -35,7 +36,7 @@ export default class AddFolder extends Component {
             >
                 Clear
             </button>
-          </div>
+          </section>
         )
     }
 }

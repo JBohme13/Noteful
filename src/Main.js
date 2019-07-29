@@ -8,7 +8,7 @@ export default class Main extends Component {
     render() {
         const value = this.context;
         return(
-            <div className='main-container'>
+            <section className='main-container'>
                 {
                     value.routes.map((route, i) => {
                       return(
@@ -20,7 +20,7 @@ export default class Main extends Component {
                         />
                     )})
                 }
-            </div>
+            </section>
         )
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
-import DeleteError from './DeleteError'
+
 import './NoteMain.css'
 
 export default class NoteMain extends Component {
@@ -30,9 +30,9 @@ export default class NoteMain extends Component {
           </button>
         </div> : '');
       return(
-          <div className='main-container'>
+          <section className='main-container'>
             { selectedNote }
-          </div>
+          </section>
       )
   }
 }

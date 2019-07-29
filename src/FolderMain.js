@@ -22,7 +22,10 @@ export default class FolderMain extends Component {
               <Link 
                 id='note-link'
                 to={`/notes/${note.id}`}
-                onClick={() => value.setNoteId(note.id)}
+                onClick={() => {
+                  value.setNoteId(note.id);
+                  value.setFolderId(note.folderId);
+                }}
               >
                 {note.name}
               </Link>
@@ -37,11 +40,11 @@ export default class FolderMain extends Component {
                 </DeleteError>
             </section> : '');
         return(
-          <div className='main-container'>
+          <section className='main-container'>
             <FolderError>
               {notesInFolder}
             </FolderError>
-          </div>
+          </section>
         )
     }
 }

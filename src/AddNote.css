@@ -3,7 +3,7 @@
     flex-direction: column;
 }
 
-#note-body {
+#type-note-here {
     white-space: pre-wrap;
     height: 300px;
     width: 80%;

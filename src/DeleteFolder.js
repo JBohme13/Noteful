@@ -7,7 +7,7 @@ export default class DeleteFolder extends Component {
     render() {
         const value = this.context;
         return(
-          <div id='delete-folder-container'>
+          <section id='delete-folder-container'>
             <h2>Delete folder</h2>
             <form id='delete-folder-form'>
                 <label htmlFor='select-folder-for-delete'>Select folder</label>
@@ -16,6 +16,7 @@ export default class DeleteFolder extends Component {
                     name='select-folder-for-delete'
                     id='select-folder-for-delete'
                     required='required'
+                    aria-required='true'
                   >
                       {
                           value.folders.map((folder, i) => {
@@ -44,7 +45,7 @@ export default class DeleteFolder extends Component {
             >
                 Clear
             </button>
-          </div>
+          </section>
         )
     }
 }

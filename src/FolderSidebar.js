@@ -14,10 +14,10 @@ export default class folderSidebar extends Component {
     static contextType = NotefulContext;
     render() {
         const value = this.context
-        const folderId = this.props.match.folderId;
+        const folderId = value.folderId;
         const folders = value.folders.map((folder, i) => 
             folder.id === folderId ?
-              <div key={i} className='folder' id='selected'>
+              <section key={i} className='folder' id='current-folder'>
                 <Link 
                   className='folder-link' 
                   to={`/folders/${folder.id}`}
@@ -25,8 +25,8 @@ export default class folderSidebar extends Component {
                 >
                   {folder.name}
                 </Link>
-              </div> :
-              <div key={i} className='folder'>
+              </section> :
+              <section key={i} className='folder'>
                 <Link 
                   className='folder-link' 
                   to={`/folders/${folder.id}`}
@@ -34,7 +34,7 @@ export default class folderSidebar extends Component {
                 >
                   {folder.name}
                 </Link>
-              </div>
+              </section>
         )
         return(
             <section className='sidebar-container'>

@@ -238,17 +238,14 @@ class App extends Component {
     return(
       <NotefulContext.Provider
         value={contextValue}>
-        <div className='app-container'>
+        <main id='app-container'>
           <Header />
           <Main />
           <Sidebar />
-          <div className='error-container'>
+          <section id='error-container'>
             {this.state.error}
-          </div>
-          <div className='sucess-container'>
-            {this.state.sucess}
-          </div>
-        </div>
+          </section>
+        </main>
       </NotefulContext.Provider>
     )
   }
