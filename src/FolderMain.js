@@ -18,9 +18,9 @@ export default class FolderMain extends Component {
         const notes = value.notes;
         const notesInFolder = notes.map((note, i) => 
             note.folderId === folderId ? 
-            <section id='folders-main' key={i}>
+            <section className='folders-main' key={i}>
               <Link 
-                id='note-link'
+                className='note-link'
                 to={`/notes/${note.id}`}
                 onClick={() => {
                   value.setNoteId(note.id);

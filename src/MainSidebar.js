@@ -9,9 +9,9 @@ export default class MainSidebar extends Component {
     render() {
         const value = this.context;
         const folders = value.folders.map((folder, i) => 
-            <section key={i} id='folder'>
+            <section key={i} className='folder'>
                 <Link 
-                  id='folder-link' 
+                  className='folder-link' 
                   to={`/folders/${folder.id}`}
                   onClick={() => value.setFolderId(folder.id)}
                 >

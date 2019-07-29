@@ -9,7 +9,7 @@ export default class MainMain extends Component{
     render() {
         const value = this.context;
         const notes = value.notes.map((note, i) => 
-              <section id='notes-main' key={i}>
+              <section className='notes-main' key={i}>
                 <Link 
                   to={`/notes/${note.id}`} 
                   id='note-link'
@@ -20,7 +20,7 @@ export default class MainMain extends Component{
                 >
                   {note.name}
                 </Link>
-                <span id='note-modified'>{new Date(note.modified).toLocaleString()}</span>
+                <span className='note-modified'>{new Date(note.modified).toLocaleString()}</span>
                   <button 
                     id='delete-button'
                     onClick={e => value.deleteNote(note.id)}

@@ -1,4 +1,4 @@
-#folders-main {
+.folders-main {
     height: 100px;
     text-align: center;
     margin-top: 2.5px;
@@ -14,7 +14,7 @@
     color: darkslategrey;
 }
 
-#note-link {
+.note-link {
     text-decoration: none;
     color: darkslategrey;
     font-size: 24px;

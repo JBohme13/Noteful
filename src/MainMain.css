@@ -1,4 +1,4 @@
-#notes-main {
+.notes-main {
     height: 100px;
     text-align: center;
     margin-top: 2.5px;
@@ -10,7 +10,7 @@
     justify-content: space-evenly;
 }
 
-#note-modified {
+.note-modified {
     color: darkslategrey;
 }
 
