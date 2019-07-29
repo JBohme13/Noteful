@@ -171,15 +171,16 @@ class App extends Component {
         return Promise.all([folderRes.json(), notesRes.json()])
       })
       .then(([folders, notes]) => {
-        console.log(folders);
-        console.log(notes);
         this.setState({
           folders: folders,
-          notes: notes
+          notes: notes,
+          error: ''
         })
       })
       .catch(error => {
-        console.error({error})
+        this.setState({
+          error: `Something went Wrong, ${error.message}`
+        })
         })
     }
 

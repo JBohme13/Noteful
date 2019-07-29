@@ -26,9 +26,6 @@ export default class NoteSidebar extends Component {
                   {folder.name}
                 </Link>
               </section> : '');
-        console.log(selectedFolder);
-        console.log(folders);
-        console.log(folderId);
         return(
             <section className='sidebar-container'>
               <FolderError>

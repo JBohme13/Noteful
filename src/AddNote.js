@@ -48,7 +48,6 @@ export default class AddNote extends Component {
                     id='note-submit'
                     type='submit'
                     onClick={event => {
-                        console.log('submit button clicked');
                         return value.addNote(event, document.getElementById('note-name').value, document.getElementById('type-note-here').value, document.getElementById('select-folder').value)}
                     }
                   >
