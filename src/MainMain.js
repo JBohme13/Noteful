@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
-import NoteError from './NoteError'
 import PropTypes from 'prop-types'
 import './MainMain.css'
 
@@ -9,8 +8,7 @@ export default class MainMain extends Component{
     static contextType = NotefulContext;
     render() {
         const value = this.context;
-        console.log(value.notes);
-        const notes = value.notes.map((note, i) => {
+        const renderNotes = value.notes.map((note, i) => {
           return(
               <section className='notes-main' key={i}>
                 <Link 
@@ -35,12 +33,9 @@ export default class MainMain extends Component{
               </section>
           )}
         )
-        console.log(notes);
         return(
             <section className='main-container'>
-              <NoteError>
-                { notes }
-              </NoteError>
+                { renderNotes }
               <button 
                 id='add-note-container'
                 onClick ={() => value.history.push('/add-note')}>

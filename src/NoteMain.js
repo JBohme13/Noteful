@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
-
 import './NoteMain.css'
 
 export default class NoteMain extends Component {

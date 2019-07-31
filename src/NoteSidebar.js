@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
-import FolderError from './FolderError'
 import './NoteSidebar.css'
 
 export default class NoteSidebar extends Component {
@@ -28,9 +27,7 @@ export default class NoteSidebar extends Component {
               </section> : '');
         return(
             <section className='sidebar-container'>
-              <FolderError>
                 { selectedFolder }
-              </FolderError>
               <button 
                 id='back-button'
                 onClick={() => value.history.push('/')}

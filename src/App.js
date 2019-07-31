@@ -34,6 +34,10 @@ class App extends Component {
         value: '',
         touched: false,
       },
+      folderName: {
+        value: '',
+        touched: false,
+      },
     }
   }
 
@@ -79,6 +83,14 @@ class App extends Component {
       this.setState({
         notes: updateNotes,
         error: '',
+        noteName: {
+          value: '',
+          touched: false,
+        },
+        noteBody: {
+          value: '',
+          touched: false,
+        },
       })
       this.props.history.push('/');
     })
@@ -90,7 +102,7 @@ class App extends Component {
     const uuidv4 = require('uuid/v4');
     const data = {
       id: uuidv4(),
-      name: this.state.noteName.value,
+      name: this.state.folderName.value,
     };
     fetch('http://localhost:9090/folders/', {
       method: 'POST',
@@ -112,6 +124,10 @@ class App extends Component {
       this.setState({
         folders: updateFolders,
         error: '',
+        folderName: {
+          value: '',
+          touched: false,
+        }
       });
       this.props.history.push('/');
     })
@@ -164,7 +180,17 @@ class App extends Component {
   } 
 
   handleClearButton = (event) => {
-    this.props.history.push('/')
+    this.props.history.push('/');
+    this.setState({
+      noteName: {
+        value: '',
+        touched: false,
+      },
+      noteBody: {
+        value: '',
+        touched: false,
+      },
+    })
   }
 
   handleNameChange = name => {
@@ -185,19 +211,14 @@ class App extends Component {
     })
   }
 
-  validateNameInput = () => {
-    const name = this.state.noteName.value.trim();
-    if (name.length < 3) {
-      return 'Note name must be at least three characters'
-    }
-  };
-
-  validateNoteInput = () => {
-    const body = this.state.noteBody.value.trim();
-    if (body.length > 1) {
-      return 'Note body must not be empty'
-    }
-  };
+  handleFolderNameChange = folder => {
+    this.setState({
+      folderName: {
+        value: folder,
+        touched: true,
+      }
+    })
+  }
 
   componentDidMount() {
     Promise.all([
@@ -211,11 +232,10 @@ class App extends Component {
           return notesRes.json().then(e => Promise.reject());
         return Promise.all([folderRes.json(), notesRes.json()])
       })
-      .then(value => {
-        console.log(value)
+      .then(([foldersRes, notesRes]) => {
         this.setState({
-          folders: value[0],
-          notes: value[1],
+          folders: foldersRes,
+          notes: notesRes,
           error: ''
         })
       })
@@ -267,7 +287,6 @@ class App extends Component {
       folders: this.state.folders,
       notes: this.state.notes,
       deleteNote: this.deleteNote,
-      routes: routes,
       noteId: this.state.noteId,
       folderId: this.state.folderId,
       setNoteId: this.setNoteId,
@@ -279,6 +298,7 @@ class App extends Component {
       history: this.props.history,
       handleNameChange: this.handleNameChange,
       handleNoteChange: this.handleNoteChange,
+      handleFolderNameChange: this.handleFolderNameChange,
       noteName: {
         value: this.state.noteName.value,
         touched: this.state.noteName.touched,
@@ -286,6 +306,10 @@ class App extends Component {
       noteBody: {
         value: this.state.noteBody.value,
         touched: this.state.noteBody.touched,
+      },
+      folderName: {
+        value: this.state.folderName.value,
+        touched: this.state.folderName.touched,
       },
       validateNameInput: this.validateNameInput,
       validateNoteInput: this.validateNoteInput,
@@ -295,8 +319,8 @@ class App extends Component {
         value={contextValue}>
         <main id='app-container'>
           <Header />
-          <Main />
-          <Sidebar />
+          <Main routes={routes}/>
+          <Sidebar routes={routes}/>
           <section id='error-container'>
             {this.state.error}
           </section>

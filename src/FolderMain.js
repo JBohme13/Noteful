@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
-import FolderError from './FolderError'
-import DeleteError from './DeleteError'
 import './FolderMain.css'
 
 export default class FolderMain extends Component {
@@ -30,20 +28,21 @@ export default class FolderMain extends Component {
                 {note.name}
               </Link>
               <span id='note-modified'>{new Date(note.modified).toLocaleString()}</span>
-                <DeleteError>
                   <button 
                     id='delete-button'
                     onClick={e => value.deleteNote(note.id)}
                   >
                     Delete
                   </button>
-                </DeleteError>
             </section> : '');
         return(
           <section className='main-container'>
-            <FolderError>
               {notesInFolder}
-            </FolderError>
+              <button 
+                id='add-note-container'
+                onClick ={() => value.history.push('/add-note')}>
+                  Add Note
+              </button>
           </section>
         )
     }

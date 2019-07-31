@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
 import NotefulContext from './NotefulContext'
-import FolderError from './FolderError'
 import './MainSidebar.css'
 
 export default class MainSidebar extends Component {
@@ -21,9 +20,7 @@ export default class MainSidebar extends Component {
         )
         return(
             <section className='sidebar-container'>
-                <FolderError>
                 { folders }
-                </FolderError>
                 <button 
                   id='add-folder'
                   onClick={() => value.history.push('/add-folder')}>

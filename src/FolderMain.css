@@ -19,3 +19,17 @@
     color: darkslategrey;
     font-size: 24px;
 }
+
+#add-note-container:active {
+    box-shadow: -1px -1px;
+}
+
+#add-note-container {
+    border: 1px solid grey;
+    border-radius: 3px;
+    box-shadow: 1px 1px;
+    margin: 5px;
+    height: 22px;
+    font-size: 14px;
+    color: darkslategrey;
+}

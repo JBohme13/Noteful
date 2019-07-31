@@ -1,26 +1,36 @@
 import React, { Component } from 'react'
 import {Route} from 'react-router-dom'
-import NotefulContext from './NotefulContext'
+import MainError from './MainError'
+import PropTypes from 'prop-types'
 import './Main.css'
 
 export default class Main extends Component {
     static contextType = NotefulContext;
     render() {
-        const value = this.context;
         return(
-            <section className='main-container'>
+            <MainError>
+              <section className='main-container'>
                 {
-                    value.routes.map((route, i) => {
-                      return(
-                        <Route
-                          key={i}
-                          path={route.path}
-                          exact={route.exact}
-                          component={route.main}
-                        />
+                  this.props.routes.map((route, i) => {
+                    return(
+                      <Route
+                        key={i}
+                        path={route.path}
+                        exact={route.exact}
+                        component={route.main}
+                      />
                     )})
                 }
-            </section>
+              </section>
+            </MainError>
         )
     }
+};
+
+Main.propTypes = {
+    routes: PropTypes.array,
+};
+
+Main.defaultProps = {
+    routes: [],
 }
