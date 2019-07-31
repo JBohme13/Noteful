@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import './Sidebar.css'
 
 export default class Sidebar extends Component {
-    static contextType = NotefulContext;
     render() {
         return(
           <SidebarError>

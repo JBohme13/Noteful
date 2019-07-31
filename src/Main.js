@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 import './Main.css'
 
 export default class Main extends Component {
-    static contextType = NotefulContext;
     render() {
         return(
             <MainError>
