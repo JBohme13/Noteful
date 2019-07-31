@@ -24,6 +24,7 @@
     color: darkslategrey;
 }
 
-#back-button:active {
+#back-button:hover {
     box-shadow: -1px -1px;
+    cursor: pointer;
 }

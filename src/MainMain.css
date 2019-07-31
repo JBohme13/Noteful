@@ -31,8 +31,14 @@
     color: darkslategrey;
 }
 
-#add-note-container:active {
+#delete-button:hover {
     box-shadow: -1px -1px;
+    cursor: pointer;
+}
+
+#add-note-container:hover {
+    box-shadow: -1px -1px;
+    cursor: pointer;
 }
 
 #add-note-container {

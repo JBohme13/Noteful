@@ -30,8 +30,9 @@
     color: darkslategrey;
 }
 
-#add-folder:active {
+#add-folder:hover {
     box-shadow: -1px -1px;
+    cursor: pointer;
 }
 
 #delete-folder {
@@ -44,6 +45,7 @@
     color: darkslategrey;
 }
 
-#delete-folder:active {
+#delete-folder:hover {
     box-shadow: -1px -1px;
+    cursor: pointer;
 }

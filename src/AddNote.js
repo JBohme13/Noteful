@@ -48,7 +48,7 @@ export default class AddNote extends Component {
                     type='radio'
                     name='select-folder'
                     id='select-folder'
-                    required='required'
+                    required={true}
                     aria-required='true'
                   >
                       {
@@ -67,6 +67,8 @@ export default class AddNote extends Component {
                   <label htmlFor='type-note-here'>Type note here</label><br/>
                   <textarea 
                     id='type-note-here'
+                    required={true}
+                    aria-required='true'
                     onChange={event => value.handleNoteChange(event.target.value)}
                   >
                   </textarea>

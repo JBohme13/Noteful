@@ -23,6 +23,11 @@
     color: darkslategrey;
 }
 
+#folder-submit:hover {
+    box-shadow: -1px -1px;
+    cursor: pointer;
+}
+
 #folder-clear {
     position: relative;
     left: 72px;
@@ -34,6 +39,11 @@
     box-shadow: 1px 1px;
     font-size: 14px;
     color: darkslategrey;
+}
+
+#folder-clear:hover {
+    box-shadow: -1px -1px;
+    cursor: pointer;
 }
 
 label {
