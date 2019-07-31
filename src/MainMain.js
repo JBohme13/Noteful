@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
-import PropTypes from 'prop-types'
 import './MainMain.css'
 
 export default class MainMain extends Component{
@@ -44,11 +43,4 @@ export default class MainMain extends Component{
             </section>
         )
     }
-};
-
-MainMain.propTypes = {
-  notes: PropTypes.array,
-  setNoteId: PropTypes.func,
-  setFolderid: PropTypes.func,
-  deleteNotes: PropTypes.func,
 };

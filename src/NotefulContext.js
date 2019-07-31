@@ -4,7 +4,6 @@ const NotefulContext = React.createContext({
     folders: [],
     notes: [],
     deleteNote: () => {},
-    routes: [],
     setNoteId: () => {},
     setFolderId: () => {},
     noteId: '',
@@ -14,6 +13,23 @@ const NotefulContext = React.createContext({
     deleteFolder: () => {},
     handleClearButton: () => {},
     history: {},
+    handleNameChange: () => {},
+    handleNoteChange: () => {},
+    handleFolderNameChange: () => {},
+    noteName: {
+        value: '',
+        touched: false,
+    },
+    noteBody: {
+        value: '',
+        touched: false,
+    },
+    folderName: {
+        value: '',
+        touched: false,
+    },
+    validateNameInput: () => {},
+    validateNoteInput: () => {},
 })
 
 export default NotefulContext;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
 import ValidationError from './ValidationError'
-import PropTypes from 'prop-types'
 import './AddNote.css'
 
 export default class AddNote extends Component {
@@ -98,23 +97,3 @@ export default class AddNote extends Component {
         )
     }
 };
-AddNote.propTypes = {
-  validateNameInput: PropTypes.func,
-  validateNoteInput: PropTypes.func,
-  handleNameChange: PropTypes.func,
-  handleNoteChange: PropTypes.func,
-  handleClearButton: PropTypes.func,
-  addNote: PropTypes.func,
-  folders: PropTypes.array,
-  noteName: PropTypes.object,
-  noteBody: PropTypes.object,
-};
-
-AddNote.defaultProps = {
-  folders: [],
-  noteName: {},
-  noteBody: {},
-  addNote: () => {},
-  handleClearButton: () => {},
-
-}
