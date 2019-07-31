@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
+import ValidationError from './ValidationError'
+import PropTypes from 'prop-types'
 import './AddNote.css'
 
 export default class AddNote extends Component {
@@ -7,6 +9,8 @@ export default class AddNote extends Component {
 
     render() {
         const value = this.context;
+        const nameError = value.validateNameInput();
+        const bodyError = value.validateNoteInput();
         return(
           <form id='form-container'>
               <h2>Add new note</h2>
@@ -18,7 +22,11 @@ export default class AddNote extends Component {
                     id='note-name'
                     required='required'
                     aria-required='true'
+                    onChange={event => value.handleNameChange(event.target.value)}
                   />
+                  {value.noteName.touched && (
+                    <ValidationError message={nameError} />
+                  )}
                   <br/>
                   <label htmlFor='select-folder'>Select a folder</label><br/>
                   <select 
@@ -42,13 +50,24 @@ export default class AddNote extends Component {
                       }
                   </select><br/>
                   <label htmlFor='type-note-here'>Type note here</label><br/>
-                  <textarea id='type-note-here'></textarea>
+                  <textarea 
+                    id='type-note-here'
+                    onChange={event => value.handleNoteChange(event.target.value)}
+                  >
+                  </textarea>
+                  {value.noteBody.touched &&(
+                    <ValidationError message={bodyError} />
+                  )}
                   <br/>
                   <button 
                     id='note-submit'
                     type='submit'
+                    disabled = {
+                      nameError ||
+                      bodyError
+                    }
                     onClick={event => {
-                        return value.addNote(event, document.getElementById('note-name').value, document.getElementById('type-note-here').value, document.getElementById('select-folder').value)}
+                        return value.addNote(event, document.getElementById('select-folder').value)}
                     }
                   >
                       Submit
@@ -60,4 +79,24 @@ export default class AddNote extends Component {
           </form>
         )
     }
+};
+AddNote.propTypes = {
+  validateNameInput: PropTypes.func,
+  validateNoteInput: PropTypes.func,
+  handleNameChange: PropTypes.func,
+  handleNoteChange: PropTypes.func,
+  handleClearButton: PropTypes.func,
+  addNote: PropTypes.func,
+  folders: PropTypes.array,
+  noteName: PropTypes.object,
+  noteBody: PropTypes.object,
+};
+
+AddNote.defaultProps = {
+  folders: [],
+  noteName: {},
+  noteBody: {},
+  addNote: () => {},
+  handleClearButton: () => {},
+
 }

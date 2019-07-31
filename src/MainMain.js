@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import NotefulContext from './NotefulContext'
-import NoteError from './noteError'
+import NoteError from './NoteError'
+import PropTypes from 'prop-types'
 import './MainMain.css'
 
 export default class MainMain extends Component{
     static contextType = NotefulContext;
     render() {
         const value = this.context;
-        const notes = value.notes.map((note, i) => 
+        console.log(value.notes);
+        const notes = value.notes.map((note, i) => {
+          return(
               <section className='notes-main' key={i}>
                 <Link 
                   to={`/notes/${note.id}`} 
@@ -20,7 +23,9 @@ export default class MainMain extends Component{
                 >
                   {note.name}
                 </Link>
-                <span className='note-modified'>{new Date(note.modified).toLocaleString()}</span>
+                <span 
+                  className='note-modified'>{new Date(note.modified).toLocaleString()}
+                </span>
                   <button 
                     id='delete-button'
                     onClick={e => value.deleteNote(note.id)}
@@ -28,7 +33,9 @@ export default class MainMain extends Component{
                     Delete
                   </button>
               </section>
+          )}
         )
+        console.log(notes);
         return(
             <section className='main-container'>
               <NoteError>
@@ -37,14 +44,16 @@ export default class MainMain extends Component{
               <button 
                 id='add-note-container'
                 onClick ={() => value.history.push('/add-note')}>
-                <a 
-                  href={'/add-note'}
-                  id='add-note'
-                >
                   Add Note
-                </a>
               </button>
             </section>
         )
     }
-}
+};
+
+MainMain.propTypes = {
+  notes: PropTypes.array,
+  setNoteId: PropTypes.func,
+  setFolderid: PropTypes.func,
+  deleteNotes: PropTypes.func,
+};

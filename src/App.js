@@ -26,6 +26,14 @@ class App extends Component {
       noteId: null,
       folderId: null,
       error: '',
+      noteName: {
+        value: '',
+        touched: false,
+      },
+      noteBody: {
+        value: '',
+        touched: false,
+      },
     }
   }
 
@@ -41,13 +49,13 @@ class App extends Component {
     })
   }
 
-  addNote = (event, name, body, folder) => {
+  addNote = (event, folder) => {
     event.preventDefault();
     const uuidv4 = require('uuid/v4');
     const data = {
       id: uuidv4(),
-      name: name,
-      content: body,
+      name: this.state.noteName.value,
+      content: this.state.noteBody.value,
       folderId: folder,
       modified: new Date()
     };
@@ -68,7 +76,8 @@ class App extends Component {
     .then(addResponseJson => {
       let updateNotes = this.state.notes;
       updateNotes.push(addResponseJson);
-      this.setState({          notes: updateNotes,
+      this.setState({
+        notes: updateNotes,
         error: '',
       })
       this.props.history.push('/');
@@ -76,12 +85,12 @@ class App extends Component {
     .catch(error => this.setState({error: error.message}))
   }
 
-  addFolder = (event, name) => {
+  addFolder = (event) => {
     event.preventDefault();
     const uuidv4 = require('uuid/v4');
     const data = {
       id: uuidv4(),
-      name: name,
+      name: this.state.noteName.value,
     };
     fetch('http://localhost:9090/folders/', {
       method: 'POST',
@@ -102,6 +111,7 @@ class App extends Component {
       updateFolders.push(addResponseJson);
       this.setState({
         folders: updateFolders,
+        error: '',
       });
       this.props.history.push('/');
     })
@@ -154,9 +164,40 @@ class App extends Component {
   } 
 
   handleClearButton = (event) => {
-    event.preventDefault();
     this.props.history.push('/')
   }
+
+  handleNameChange = name => {
+    this.setState({
+      noteName: {
+        value: name,
+        touched: true,
+      }
+    })
+  }
+
+  handleNoteChange = note => {
+    this.setState({
+      noteBody: {
+        value: note,
+        touched: true,
+      }
+    })
+  }
+
+  validateNameInput = () => {
+    const name = this.state.noteName.value.trim();
+    if (name.length < 3) {
+      return 'Note name must be at least three characters'
+    }
+  };
+
+  validateNoteInput = () => {
+    const body = this.state.noteBody.value.trim();
+    if (body.length > 1) {
+      return 'Note body must not be empty'
+    }
+  };
 
   componentDidMount() {
     Promise.all([
@@ -170,10 +211,11 @@ class App extends Component {
           return notesRes.json().then(e => Promise.reject());
         return Promise.all([folderRes.json(), notesRes.json()])
       })
-      .then(([folders, notes]) => {
+      .then(value => {
+        console.log(value)
         this.setState({
-          folders: folders,
-          notes: notes,
+          folders: value[0],
+          notes: value[1],
           error: ''
         })
       })
@@ -235,6 +277,18 @@ class App extends Component {
       deleteFolder: this.deleteFolder,
       handleClearButton: this.handleClearButton,
       history: this.props.history,
+      handleNameChange: this.handleNameChange,
+      handleNoteChange: this.handleNoteChange,
+      noteName: {
+        value: this.state.noteName.value,
+        touched: this.state.noteName.touched,
+      },
+      noteBody: {
+        value: this.state.noteBody.value,
+        touched: this.state.noteBody.touched,
+      },
+      validateNameInput: this.validateNameInput,
+      validateNoteInput: this.validateNoteInput,
     }
     return(
       <NotefulContext.Provider
