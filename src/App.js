@@ -63,7 +63,7 @@ class App extends Component {
       folderId: folder,
       modified: new Date()
     };
-    fetch('http://localhost:9090/notes/', {
+    fetch('http://localhost:8000/api/notes/', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -104,7 +104,7 @@ class App extends Component {
       id: uuidv4(),
       name: this.state.folderName.value,
     };
-    fetch('http://localhost:9090/folders/', {
+    fetch('http://localhost:8000/api/folders/', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -135,7 +135,7 @@ class App extends Component {
   }
   
   deleteNote = (noteId) => {
-    fetch(`http://localhost:9090/notes/${noteId}`, {
+    fetch(`http://localhost:8000/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -158,7 +158,7 @@ class App extends Component {
 
   deleteFolder = (event, folderId) => {
     event.preventDefault();
-    fetch(`http://localhost:9090/folders/${folderId}`, {
+    fetch(`http://localhost:8000/api/folders/${folderId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -190,6 +190,7 @@ class App extends Component {
         value: '',
         touched: false,
       },
+      error: '',
     })
   }
 
@@ -222,8 +223,8 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch('http://localhost:9090/folders'),
-      fetch('http://localhost:9090/notes')
+      fetch('http://localhost:8000/api/folders'),
+      fetch('http://localhost:8000/api/notes')
     ])
       .then(([folderRes, notesRes]) => {
         if(!folderRes.ok) 
@@ -239,9 +240,9 @@ class App extends Component {
           error: ''
         })
       })
-      .catch(error => {
+      .catch(err => {
         this.setState({
-          error: `Something went Wrong, ${error.message}`
+          error: `Something went Wrong, ${err.message}`
         })
         })
     }
