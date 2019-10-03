@@ -55,15 +55,13 @@ class App extends Component {
 
   addNote = (event, folder) => {
     event.preventDefault();
-    const uuidv4 = require('uuid/v4');
     const data = {
-      id: uuidv4(),
       name: this.state.noteName.value,
       content: this.state.noteBody.value,
-      folderId: folder,
+      folderid: folder,
       modified: new Date()
     };
-    fetch('http://localhost:8000/api/notes/', {
+    fetch('https://tranquil-inlet-44640.herokuapp.com/api/notes/', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -71,6 +69,7 @@ class App extends Component {
       body: JSON.stringify(data),
     })
     .then(addResponse => {
+      console.log(data)
       if(addResponse.ok) {
         return addResponse.json();
       } else{
@@ -104,7 +103,7 @@ class App extends Component {
       id: uuidv4(),
       name: this.state.folderName.value,
     };
-    fetch('http://localhost:8000/api/folders/', {
+    fetch('https://tranquil-inlet-44640.herokuapp.com/api/folders/', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -135,7 +134,7 @@ class App extends Component {
   }
   
   deleteNote = (noteId) => {
-    fetch(`http://localhost:8000/api/notes/${noteId}`, {
+    fetch(`https://tranquil-inlet-44640.herokuapp.com/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -143,11 +142,34 @@ class App extends Component {
     })
     .then(deleteResponse => {
       if(deleteResponse.ok) {
-        let updatedNotes = this.state.notes.filter(note => note.id !== noteId )
+        let updatedNotes = this.state.notes.filter(note => note.id !== noteId)
         this.setState({
           notes: updatedNotes,
           error: '',
         })
+        Promise.all([
+          fetch('https://tranquil-inlet-44640.herokuapp.com/api/folders'),
+          fetch('https://tranquil-inlet-44640.herokuapp.com/api/notes')
+        ])
+          .then(([folderRes, notesRes]) => {
+            if(!folderRes.ok) 
+              return folderRes.json().then(e => Promise.reject());
+            if(!notesRes.ok)
+              return notesRes.json().then(e => Promise.reject());
+            return Promise.all([folderRes.json(), notesRes.json()])
+          })
+          .then(([foldersRes, notesRes]) => {
+            this.setState({
+              folders: foldersRes,
+              notes: notesRes,
+              error: ''
+            })
+          })
+          .catch(err => {
+            this.setState({
+              error: `Something went Wrong, ${err.message}`
+            })
+            })
         this.props.history.push('/');
       }else {
         throw new Error('Something went wrong, note was not deleted')
@@ -158,7 +180,7 @@ class App extends Component {
 
   deleteFolder = (event, folderId) => {
     event.preventDefault();
-    fetch(`http://localhost:8000/api/folders/${folderId}`, {
+    fetch(`https://tranquil-inlet-44640.herokuapp.com/api/folders/${folderId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -171,6 +193,29 @@ class App extends Component {
           folders: updatedFolders,
           error: '',
         });
+        Promise.all([
+          fetch('https://tranquil-inlet-44640.herokuapp.com/api/folders'),
+          fetch('https://tranquil-inlet-44640.herokuapp.com/api/notes')
+        ])
+          .then(([folderRes, notesRes]) => {
+            if(!folderRes.ok) 
+              return folderRes.json().then(e => Promise.reject());
+            if(!notesRes.ok)
+              return notesRes.json().then(e => Promise.reject());
+            return Promise.all([folderRes.json(), notesRes.json()])
+          })
+          .then(([foldersRes, notesRes]) => {
+            this.setState({
+              folders: foldersRes,
+              notes: notesRes,
+              error: ''
+            })
+          })
+          .catch(err => {
+            this.setState({
+              error: `Something went Wrong, ${err.message}`
+            })
+            })
         this.props.history.push('/');
       } else {
         throw new Error('Something went wrong, folder was not deleted')
@@ -223,8 +268,8 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch('http://localhost:8000/api/folders'),
-      fetch('http://localhost:8000/api/notes')
+      fetch('https://tranquil-inlet-44640.herokuapp.com/api/folders'),
+      fetch('https://tranquil-inlet-44640.herokuapp.com/api/notes')
     ])
       .then(([folderRes, notesRes]) => {
         if(!folderRes.ok) 
