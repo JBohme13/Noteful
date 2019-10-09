@@ -10,6 +10,7 @@ import Main from './Main'
 import Sidebar from './Sidebar'
 import AddNote from './AddNote'
 import AddFolder from './AddFolder'
+import EditNote from './EditNote'
 import DeleteFolder from './DeleteFolder'
 import NotefulContext from './NotefulContext'
 import { withRouter } from 'react-router-dom'
@@ -38,6 +39,14 @@ class App extends Component {
         value: '',
         touched: false,
       },
+      editNoteName: {
+        value: '',
+        touched: true
+      },
+      editNoteBody: {
+        value: '',
+        touched: true
+      }
     }
   }
 
@@ -61,7 +70,7 @@ class App extends Component {
       folderid: folder,
       modified: new Date()
     };
-    fetch('https://tranquil-inlet-44640.herokuapp.com/api/notes/', {
+    fetch('http://localhost:8000/api/notes/', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -69,7 +78,6 @@ class App extends Component {
       body: JSON.stringify(data),
     })
     .then(addResponse => {
-      console.log(data)
       if(addResponse.ok) {
         return addResponse.json();
       } else{
@@ -103,7 +111,7 @@ class App extends Component {
       id: uuidv4(),
       name: this.state.folderName.value,
     };
-    fetch('https://tranquil-inlet-44640.herokuapp.com/api/folders/', {
+    fetch('http://localhost:8000/api/folders/', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -134,7 +142,7 @@ class App extends Component {
   }
   
   deleteNote = (noteId) => {
-    fetch(`https://tranquil-inlet-44640.herokuapp.com/api/notes/${noteId}`, {
+    fetch(`http://localhost:8000/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -148,8 +156,8 @@ class App extends Component {
           error: '',
         })
         Promise.all([
-          fetch('https://tranquil-inlet-44640.herokuapp.com/api/folders'),
-          fetch('https://tranquil-inlet-44640.herokuapp.com/api/notes')
+          fetch('http://localhost:8000/api/folders'),
+          fetch('http://localhost:8000/api/notes')
         ])
           .then(([folderRes, notesRes]) => {
             if(!folderRes.ok) 
@@ -178,9 +186,47 @@ class App extends Component {
     .catch(error => this.setState({error: error.message}))
   }
 
+  updateNote = (event, noteBody) => {
+    event.preventDefault();
+    const noteUpdate = {
+      content: noteBody,
+      modified: new Date()
+    }
+    console.log(noteUpdate)
+    fetch(`http://localhost:8000/api/notes/${this.state.noteId}`, {
+      method: 'PATCH',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(noteUpdate)
+    })
+    .then(updateRes => {
+      Promise.all([
+        fetch('http://localhost:8000/api/folders'),
+        fetch('http://localhost:8000/api/notes')
+      ])
+        .then(([folderRes, notesRes]) => {
+          if(!folderRes.ok) 
+            return folderRes.json().then(e => Promise.reject());
+          if(!notesRes.ok)
+            return notesRes.json().then(e => Promise.reject());
+          return Promise.all([folderRes.json(), notesRes.json()])
+        })
+        .then(([foldersRes, notesRes]) => {
+          this.setState({
+            folders: foldersRes,
+            notes: notesRes,
+            error: ''
+          })
+          this.props.history.push('/');
+        })
+    })
+    .catch(error => this.setState({error: error.message}))
+  } 
+
   deleteFolder = (event, folderId) => {
     event.preventDefault();
-    fetch(`https://tranquil-inlet-44640.herokuapp.com/api/folders/${folderId}`, {
+    fetch(`http://localhost:8000/api/folders/${folderId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -194,8 +240,8 @@ class App extends Component {
           error: '',
         });
         Promise.all([
-          fetch('https://tranquil-inlet-44640.herokuapp.com/api/folders'),
-          fetch('https://tranquil-inlet-44640.herokuapp.com/api/notes')
+          fetch('http://localhost:8000/api/folders'),
+          fetch('http://localhost:8000/api/notes')
         ])
           .then(([folderRes, notesRes]) => {
             if(!folderRes.ok) 
@@ -239,6 +285,31 @@ class App extends Component {
     })
   }
 
+  handleEditButton = (noteId) => {
+    this.props.history.push('/edit-note');
+    this.setState({
+      noteId: noteId
+    })
+  }
+
+  handleEditNameChange = name => {
+    this.setState({
+      editNoteName: {
+        value: name,
+        touched: true
+      }
+    })
+  }
+
+  handleEditNoteChange = note => {
+    this.setState({
+      editNoteBody: {
+        value: note,
+        touched: true
+      }
+    })
+  }
+
   handleNameChange = name => {
     this.setState({
       noteName: {
@@ -268,8 +339,8 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch('https://tranquil-inlet-44640.herokuapp.com/api/folders'),
-      fetch('https://tranquil-inlet-44640.herokuapp.com/api/notes')
+      fetch('http://localhost:8000/api/folders'),
+      fetch('http://localhost:8000/api/notes')
     ])
       .then(([folderRes, notesRes]) => {
         if(!folderRes.ok) 
@@ -284,6 +355,8 @@ class App extends Component {
           notes: notesRes,
           error: ''
         })
+        console.log(this.state.notes)
+        console.log(this.state.folders)
       })
       .catch(err => {
         this.setState({
@@ -326,6 +399,11 @@ class App extends Component {
         path: '/delete-folder',
         exact: false,
         main: DeleteFolder
+      },
+      {
+        path:'/edit-note',
+        exact: false,
+        main: EditNote
       }
     ];
     
@@ -339,8 +417,10 @@ class App extends Component {
       setFolderId: this.setFolderId,
       addNote: this.addNote,
       addFolder: this.addFolder,
+      updateNote: this.updateNote,
       deleteFolder: this.deleteFolder,
       handleClearButton: this.handleClearButton,
+      handleEditButton: this.handleEditButton,
       history: this.props.history,
       handleNameChange: this.handleNameChange,
       handleNoteChange: this.handleNoteChange,
@@ -357,8 +437,18 @@ class App extends Component {
         value: this.state.folderName.value,
         touched: this.state.folderName.touched,
       },
+      editNoteName: {
+        value: this.state.editNoteName.value,
+        touched: this.state.editNoteName.touched,
+      },
+      editNoteBody: {
+        value: this.state.editNoteBody.value,
+        touched: this.state.editNoteBody.touched
+      },
       validateNameInput: this.validateNameInput,
       validateNoteInput: this.validateNoteInput,
+      handleEditNameChange: this.handleEditNameChange,
+      handleEditNoteChange: this.handleEditNoteChange
     }
     return(
       <NotefulContext.Provider

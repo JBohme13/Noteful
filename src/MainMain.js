@@ -24,6 +24,12 @@ export default class MainMain extends Component{
                   className='note-modified'>{new Date(note.modified).toLocaleString()}
                 </span>
                   <button 
+                    id='edit-button'
+                    onClick={e => value.handleEditButton(note.id)}
+                  >
+                    Edit
+                  </button>
+                  <button 
                     id='delete-button'
                     onClick={e => value.deleteNote(note.id)}
                   >

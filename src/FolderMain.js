@@ -15,19 +15,21 @@ export default class FolderMain extends Component {
         const folderId = value.folderId;
         const notes = value.notes;
         const notesInFolder = notes.map((note, i) => 
-            note.folderId === folderId ? 
+            note.folderid === folderId ? 
             <section className='folders-main' key={i}>
               <Link 
-                className='note-link'
-                to={`/notes/${note.id}`}
-                onClick={() => {
-                  value.setNoteId(note.id);
-                  value.setFolderId(note.folderId);
-                }}
-              >
-                {note.name}
-              </Link>
-              <span id='note-modified'>{new Date(note.modified).toLocaleString()}</span>
+                  to={`/notes/${note.id}`} 
+                  id='note-link'
+                  onClick={() => {
+                    value.setNoteId(note.id);
+                    value.setFolderId(note.folderId);
+                  }}
+                >
+                  {note.name}
+                </Link>
+                <span 
+                  className='note-modified'>{new Date(note.modified).toLocaleString()}
+                </span>
                   <button 
                     id='delete-button'
                     onClick={e => value.deleteNote(note.id)}
@@ -35,6 +37,7 @@ export default class FolderMain extends Component {
                     Delete
                   </button>
             </section> : '');
+            console.log(notesInFolder)
         return(
           <section className='main-container'>
               {notesInFolder}

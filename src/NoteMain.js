@@ -22,6 +22,12 @@ export default class NoteMain extends Component {
           </section>
           <p className='note-content'>{note.content}</p>
           <button 
+            id='edit-button'
+            onClick={e => value.handleEditButton(note.id)}
+          >
+            Edit
+          </button>
+          <button 
             id='delete-button'
             onClick={e => value.deleteNote(note.id)}
           >

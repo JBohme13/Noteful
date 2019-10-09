@@ -10,8 +10,10 @@ const NotefulContext = React.createContext({
     folderId: '',
     addNote: () => {},
     addFolder: () => {},
+    updateNote: () => {},
     deleteFolder: () => {},
     handleClearButton: () => {},
+    handleEditButton: () => {},
     history: {},
     handleNameChange: () => {},
     handleNoteChange: () => {},
@@ -28,8 +30,18 @@ const NotefulContext = React.createContext({
         value: '',
         touched: false,
     },
+    editNoteName: {
+        value: '',
+        touched: true,
+    },
+    editNoteBody: {
+        value: '',
+        touched: true,
+    },
     validateNameInput: () => {},
     validateNoteInput: () => {},
+    handleEditNameChange: () => {},
+    handleEditNoteChange: () => {}
 })
 
 export default NotefulContext;
