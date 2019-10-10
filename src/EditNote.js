@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
-//import ValidationError from './ValidationError'
-//import './EditNote.css' add css file
+import './EditNote.css'
 
 export default class EditNote extends Component {
     static defaultProps = {
@@ -34,7 +33,7 @@ export default class EditNote extends Component {
                     >
                     </textarea>
                     <button 
-                    id='note-submit'
+                    id='edit-note-submit'
                     type='submit'
                     onClick={event => {
                         return value.updateNote(event, document.getElementById('edit-note-body').value)}
@@ -43,7 +42,7 @@ export default class EditNote extends Component {
                       Submit
                   </button>
                   <button 
-                    id='note-clear'
+                    id='edit-note-clear'
                     type='reset'
                     onClick={event => value.handleClearButton(event)}
                     >

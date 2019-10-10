@@ -1,0 +1,59 @@
+#edit-note-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+#edit-note-body {
+    white-space: pre-wrap;
+    height: 300px;
+    width: 80%;
+    flex: 1;
+    order: 2;
+    font-size: 14px;
+    margin: 5px;
+    color: darkslategrey;
+}
+
+#edit-note-submit {
+    order: 4;
+    height: 22px;
+    width: 72px;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    box-shadow: 1px 1px;
+    font-size: 14px;
+    color: darkslategrey;
+}
+
+#edit-note-submit:hover {
+    box-shadow: -1px -1px;
+    cursor: pointer;
+}
+
+#edit-note-clear {
+    order: 4;
+    height: 22px;
+    width: 72px;
+    margin: 5px;
+    border: 1px solid grey;
+    border-radius: 2px;
+    box-shadow: 1px 1px;
+    font-size: 14px;
+    color: darkslategrey;
+}
+
+#edit-note-clear:hover {
+    box-shadow: -1px -1px;
+    cursor: pointer;
+}
+
+label {
+    color: darkslategrey;
+}
+
+h2 {
+    color: darkslategrey;
+    font-weight: normal;
+}
