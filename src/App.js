@@ -46,10 +46,12 @@ class App extends Component {
       editNoteBody: {
         value: '',
         touched: true
-      }
+      },
+      apiUrl: 'https://tranquil-inlet-44640.herokuapp.com'
     }
   }
-
+  //'https://tranquil-inlet-44640.herokuapp.com'
+  //'http://localhost:8000'
   setNoteId = (value) => {
     this.setState({
       noteId: value,
@@ -70,7 +72,7 @@ class App extends Component {
       folderid: folder,
       modified: new Date()
     };
-    fetch('http://localhost:8000/api/notes/', {
+    fetch(`${this.state.apiUrl}/api/notes/`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -111,7 +113,7 @@ class App extends Component {
       id: uuidv4(),
       name: this.state.folderName.value,
     };
-    fetch('http://localhost:8000/api/folders/', {
+    fetch(`${this.state.apiUrl}/api/folders/`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -142,7 +144,7 @@ class App extends Component {
   }
   
   deleteNote = (noteId) => {
-    fetch(`http://localhost:8000/api/notes/${noteId}`, {
+    fetch(`${this.state.apiUrl}/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -156,8 +158,8 @@ class App extends Component {
           error: '',
         })
         Promise.all([
-          fetch('http://localhost:8000/api/folders'),
-          fetch('http://localhost:8000/api/notes')
+          fetch(`${this.state.apiUrl}/api/folders`),
+          fetch(`${this.state.apiUrl}/api/notes`)
         ])
           .then(([folderRes, notesRes]) => {
             if(!folderRes.ok) 
@@ -192,8 +194,7 @@ class App extends Component {
       content: noteBody,
       modified: new Date()
     }
-    console.log(noteUpdate)
-    fetch(`http://localhost:8000/api/notes/${this.state.noteId}`, {
+    fetch(`${this.state.apiUrl}/api/notes/${this.state.noteId}`, {
       method: 'PATCH',
       headers: {
         'content-type': 'application/json'
@@ -202,8 +203,8 @@ class App extends Component {
     })
     .then(updateRes => {
       Promise.all([
-        fetch('http://localhost:8000/api/folders'),
-        fetch('http://localhost:8000/api/notes')
+        fetch(`${this.state.apiUrl}/api/folders`),
+        fetch(`${this.state.apiUrl}/api/notes`)
       ])
         .then(([folderRes, notesRes]) => {
           if(!folderRes.ok) 
@@ -226,7 +227,7 @@ class App extends Component {
 
   deleteFolder = (event, folderId) => {
     event.preventDefault();
-    fetch(`http://localhost:8000/api/folders/${folderId}`, {
+    fetch(`${this.state.apiUrl}/api/folders/${folderId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -240,8 +241,8 @@ class App extends Component {
           error: '',
         });
         Promise.all([
-          fetch('http://localhost:8000/api/folders'),
-          fetch('http://localhost:8000/api/notes')
+          fetch(`${this.state.apiUrl}/api/folders`),
+          fetch(`${this.state.apiUrl}/api/notes`)
         ])
           .then(([folderRes, notesRes]) => {
             if(!folderRes.ok) 
@@ -339,8 +340,8 @@ class App extends Component {
 
   componentDidMount() {
     Promise.all([
-      fetch('http://localhost:8000/api/folders'),
-      fetch('http://localhost:8000/api/notes')
+      fetch(`${this.state.apiUrl}/api/folders`),
+      fetch(`${this.state.apiUrl}/api/notes`)
     ])
       .then(([folderRes, notesRes]) => {
         if(!folderRes.ok) 
@@ -355,8 +356,6 @@ class App extends Component {
           notes: notesRes,
           error: ''
         })
-        console.log(this.state.notes)
-        console.log(this.state.folders)
       })
       .catch(err => {
         this.setState({
