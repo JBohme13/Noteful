@@ -230,10 +230,8 @@ class App extends Component {
     event.preventDefault();
     const notesInFolder = this.state.notes.filter(note => note.folderid === parseInt(folderId));
     if (notesInFolder.length !== 0) {
-      console.log('Folder contains notes and cannot be deleted, remove notes to delete this folder');
       this.setState({deleteFolderError: 'Folder contains notes and cannot be deleted, remove notes to delete this folder'})
     } else {
-      console.log('making fetch request')
     fetch(`${this.state.apiUrl}/api/folders/${folderId}`, {
       method: 'DELETE',
       headers: {

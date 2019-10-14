@@ -37,7 +37,6 @@ export default class FolderMain extends Component {
                     Delete
                   </button>
             </section> : '');
-            console.log(notesInFolder)
         return(
           <section className='main-container'>
               {notesInFolder}
