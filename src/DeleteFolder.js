@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
+import ValidationError from './ValidationError'
 import './DeleteFolder.css'
 
 export default class DeleteFolder extends Component {
     static contextType = NotefulContext;
+
     render() {
-        const value = this.context;
+      const value = this.context;
+      const deleteFolderError = value.deleteFolderError
         return(
           <section id='delete-folder-container'>
             <h2>Delete folder</h2>
@@ -31,6 +34,8 @@ export default class DeleteFolder extends Component {
                           })
                       }
                   </select>
+                  <br />
+                  <ValidationError message={deleteFolderError}/>
                   <button
                       id='delete-button' 
                       type='submit'

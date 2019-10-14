@@ -47,7 +47,8 @@ class App extends Component {
         value: '',
         touched: true
       },
-      apiUrl: 'https://tranquil-inlet-44640.herokuapp.com'
+      apiUrl: 'https://tranquil-inlet-44640.herokuapp.com',
+      deleteFolderError: '',
     }
   }
   //'https://tranquil-inlet-44640.herokuapp.com'
@@ -227,6 +228,12 @@ class App extends Component {
 
   deleteFolder = (event, folderId) => {
     event.preventDefault();
+    const notesInFolder = this.state.notes.filter(note => note.folderid === parseInt(folderId));
+    if (notesInFolder.length !== 0) {
+      console.log('Folder contains notes and cannot be deleted, remove notes to delete this folder');
+      this.setState({deleteFolderError: 'Folder contains notes and cannot be deleted, remove notes to delete this folder'})
+    } else {
+      console.log('making fetch request')
     fetch(`${this.state.apiUrl}/api/folders/${folderId}`, {
       method: 'DELETE',
       headers: {
@@ -269,6 +276,7 @@ class App extends Component {
       }
     })
     .catch(error => this.setState({error: error.message}))
+  }
   } 
 
   handleClearButton = (event) => {
@@ -447,7 +455,8 @@ class App extends Component {
       validateNameInput: this.validateNameInput,
       validateNoteInput: this.validateNoteInput,
       handleEditNameChange: this.handleEditNameChange,
-      handleEditNoteChange: this.handleEditNoteChange
+      handleEditNoteChange: this.handleEditNoteChange,
+      deleteFolderError: this.state.deleteFolderError
     }
     return(
       <NotefulContext.Provider

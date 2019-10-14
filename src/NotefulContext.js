@@ -41,7 +41,8 @@ const NotefulContext = React.createContext({
     validateNameInput: () => {},
     validateNoteInput: () => {},
     handleEditNameChange: () => {},
-    handleEditNoteChange: () => {}
+    handleEditNoteChange: () => {},
+    deleteFolderError: () => {}
 })
 
 export default NotefulContext;
