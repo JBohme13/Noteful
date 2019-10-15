@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import NotefulContext from './NotefulContext'
 import ValidationError from './ValidationError'
+import ValidateEmptyField from './ValidateEmptyField'
 import './AddNote.css'
 
 export default class AddNote extends Component {
@@ -24,6 +25,18 @@ export default class AddNote extends Component {
       }
     };
 
+    validateEmptyName = () => {
+      if (this.context.noteName.touched === false) {
+        return 'Please enter name here'
+      }
+    };
+
+    validateEmptyNote = () => {
+      if (this.context.noteBody.touched === false) {
+        return 'Please enter note here'
+      }
+    }
+
     render() {
         const value = this.context;
         const nameError = this.validateNameInput();
@@ -42,6 +55,7 @@ export default class AddNote extends Component {
                     onChange={event => value.handleNameChange(event.target.value)}
                   />
                   {value.noteName.touched && <ValidationError message={nameError} />}
+                  {<ValidateEmptyField message={this.validateEmptyName()} />}
                 <br/>
                   <label htmlFor='select-folder'>Select a folder</label><br/>
                   <select 
@@ -73,6 +87,7 @@ export default class AddNote extends Component {
                   >
                   </textarea>
                   {value.noteBody.touched && <ValidationError message={bodyError} />}
+                  {<ValidateEmptyField message={this.validateEmptyNote()} />}
                   <br/>
                   <button 
                     id='note-submit'
